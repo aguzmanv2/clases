@@ -1,0 +1,28 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+data=pd.read_csv('dataset1.csv',index_col=0)
+
+plt.hist(data.iloc[:,0])
+plt.title('Distribución del largo del sepalo en cm')
+plt.show()
+
+plt.hist(data.iloc[:,1])
+plt.title('Distribución del ancho del sepalo en cm')
+plt.show()
+
+plt.scatter(data['PetalLengthCm'],data['PetalWidthCm'])
+plt.title('Dimensiones de los petalos')
+plt.show()
+
+indices=data[data['PetalLengthCm']>=2.5].index
+data.loc[indices,'Tamaño']='Grande'
+data.loc[indices,'Color']='r'
+indices=data[data['PetalLengthCm']<2.5].index
+data.loc[indices,'Tamaño']='Pequeño'
+data.loc[indices,'Color']='b'
+data
+
+plt.scatter(data['PetalLengthCm'],data['PetalWidthCm'],c=data.loc[:,'Color'])
+plt.title('Dimensiones de Petalos')
+plt.show()
+
